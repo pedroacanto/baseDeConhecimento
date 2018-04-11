@@ -39,7 +39,7 @@
 	    	<h3 class="panel-title">SQL Utilizado</h3>
 	  </div>
   		<div class="panel-body">
-    		${chamado.sql_usado}
+    		
   		</div>
 	</div>
 	<a class="btn btn-primary" href="/chamados/chamados/">Voltar</a>		

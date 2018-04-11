@@ -1,6 +1,7 @@
 package org.chamados.models;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,16 +42,16 @@ public class Chamado {
 	@Column(columnDefinition = "text")
 	private String resolucao;
 	
-	private String notacoes_alteracao;
-	
-	@Column(columnDefinition = "text")
-	private String scripts;
+	private String notacoes_alteracao;	
 
 	@ManyToOne
 	private Sistema sistema;
 	
 	@ManyToOne
 	private Funcionario funcionario_responsavel;
+	
+	@OneToMany(mappedBy="chamado") //nome do atributo da classe no mappedBy
+	private List<Script> scripts;
 	
 	public int getId() {
 		return id;
@@ -90,14 +91,6 @@ public class Chamado {
 
 	public void setResolucao(String resolucao) {
 		this.resolucao = resolucao;
-	}
-
-	public String getScripts() {
-		return scripts;
-	}
-
-	public void setScripts(String scripts) {
-		this.scripts = scripts;
 	}
 
 	public Sistema getSistema() {
@@ -146,5 +139,13 @@ public class Chamado {
 
 	public void setAberto_funcionario(String aberto_funcionario) {
 		this.aberto_funcionario = aberto_funcionario;
+	}
+	
+	public List<Script> getScripts() {
+		return scripts;
+	}
+
+	public void setScripts(List<Script> scripts) {
+		this.scripts = scripts;
 	}
 }

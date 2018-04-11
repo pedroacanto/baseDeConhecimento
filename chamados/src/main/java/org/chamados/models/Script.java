@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="chamado_sql")
 public class Script {
 
 	@Id
@@ -15,7 +17,7 @@ public class Script {
 	private int id;
 	
 	@Column(columnDefinition="text")
-	private String sql;
+	private String script_usado;
 	
 	@ManyToOne
 	private Chamado chamado;
@@ -29,11 +31,11 @@ public class Script {
 	}
 
 	public String getSql() {
-		return sql;
+		return script_usado;
 	}
 
-	public void setSql(String sql) {
-		this.sql = sql;
+	public void setSql(String script_usado) {
+		this.script_usado = script_usado;
 	}
 
 	public Chamado getChamado() {

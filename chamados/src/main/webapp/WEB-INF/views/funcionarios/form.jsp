@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:import url="../../header.jsp" />
+<h2 align="center">Cadastro de Funcionários</h2>
 	<div class="container">
 		<form:form action="/chamados/funcionarios" method="post" commandName="funcionario">
 			<div class="form-group">

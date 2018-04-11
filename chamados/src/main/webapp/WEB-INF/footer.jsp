@@ -6,6 +6,35 @@
 <script src="<c:url value='/resources/js/bootstrap.js' />"></script>
 
 <script type="text/javascript">
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+
+function mdata(v){
+    v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
+    v=v.replace(/(\d{2})(\d)/,"$1/$2");       
+    v=v.replace(/(\d{2})(\d)/,"$1/$2");       
+                                             
+    v=v.replace(/(\d{2})(\d{2})$/,"$1$2");
+    return v;
+}
+
+
+$(document).ready(function(){
+	var divPai = $('.Linha');
+	var btnCriar = $('#criarLinha');
+	var contDivs = 0;
+	btnCriar.click(function(){
+		contDivs = contDivs + 1;
+    	divPai.append("<div class='form-group'><div class='custom-file'></div><textarea class ='form-control' placeholder='Cole o SQL Utilizado' path='scripts-num' name='scripts-"+contDivs+"'/></div>");
+	});
+});
+
 
 $("#checkTodos").click(function(){
     $('input:checkbox').not(this).prop('checked', this.checked);

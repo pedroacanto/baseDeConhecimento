@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css' />">
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap.min.css' />">
 
-<link href="css/simple-sidebar.css" rel="stylesheet">
 
 <title>Controle de Chamados</title>
 </head>

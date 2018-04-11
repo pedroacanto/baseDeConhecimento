@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:import url="../../header.jsp" />
-
 <div class="container">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -15,9 +14,8 @@
 		      </button>
 		      <a class="navbar-brand" href="/chamados/chamados/">Gerênciar Chamado</a>
 		    </div>
-		    
 			<!-- Collect the nav links, forms, and other content for toggling -->
-		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li><a href="/chamados/chamados/form">Cadastrar</a></li>
 		        <li><a href="">Busca Personalizada</a></li>
@@ -32,7 +30,6 @@
 		    </div>
 		</div>	
 	</nav>
-	
 	<c:if test="${sucesso != null}">
 		<div class="alert alert-success">
 			<strong>${sucesso}</strong>

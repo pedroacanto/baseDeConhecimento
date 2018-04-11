@@ -31,7 +31,7 @@
                 <form:errors path="data_abertura" style="color:red"/>
                 <div class="input-group">              
 					<div class="input-group-addon">--/--/----</div>
-					<form:input class ="form-control" placeholder="Data Abertura" path="data_abertura"/>
+					<form:input class ="form-control" placeholder="Data Abertura" path="data_abertura" onkeypress="mascara(this, mdata);"/>
 				</div>
             </div>
             <div class="form-group">
@@ -55,9 +55,14 @@
 			</div>
 			<div class="form-group">
 				<div class="custom-file">
-					<label for="sql_usado" >SQL Utilizado:</label>
+					<label for="sql_usado" >Scripts Utilizado:</label>
 					<form:errors path="scripts" style="color:red"/>
 					<form:textarea class ="form-control" placeholder="Cole o SQL Utilizado" path="scripts" name="scripts"/>
+					<br>
+					<div class="Linha">
+						<!-- RECEBE DIVS DINAMICAS -->
+					</div>
+					<a id='criarLinha' class="btn btn-primary">Adicionar Script</a>					
 				</div>
 			</div>
 			<div class="form-group">
