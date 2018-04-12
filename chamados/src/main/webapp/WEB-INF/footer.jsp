@@ -28,10 +28,8 @@ function mdata(v){
 $(document).ready(function(){
 	var divPai = $('.Linha');
 	var btnCriar = $('#criarLinha');
-	var contDivs = 0;
-	btnCriar.click(function(){
-		contDivs = contDivs + 1;
-    	divPai.append("<div class='form-group'><div class='custom-file'></div><textarea class ='form-control' placeholder='Cole o SQL Utilizado' path='scripts-num' name='scripts-"+contDivs+"'/></div>");
+	btnCriar.click(function(){		
+    	divPai.append("<div class='form-group'><div class='custom-file'></div><textarea class ='form-control' placeholder='Cole o SQL Utilizado' path='scripts-num' name='scripts'/></div>");
 	});
 });
 
