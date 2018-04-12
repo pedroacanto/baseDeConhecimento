@@ -16,7 +16,7 @@ function execmascara(){
 }
 
 function mdata(v){
-    v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
+    v=v.replace(/\D/g,"");                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
     v=v.replace(/(\d{2})(\d)/,"$1/$2");       
     v=v.replace(/(\d{2})(\d)/,"$1/$2");       
                                              
@@ -31,7 +31,7 @@ $(document).ready(function(){
 	var contDivs = 0;
 	btnCriar.click(function(){
 		contDivs = contDivs + 1;
-    	divPai.append("<div class='form-group'><div class='custom-file'></div><textarea class ='form-control' placeholder='Cole o SQL Utilizado' path='scripts-num' name='scripts-"+contDivs+"'/></div>");
+    	divPai.append("<div class='form-group'><div class='custom-file'></div><textarea class ='form-control' placeholder='Cole o SQL Utilizado' name='script_list'/></div>");
 	});
 });
 
@@ -52,7 +52,7 @@ $('#exampleModalCenter').on('shown.bs.modal', function (event) {
 	   var id = button.data('funcionarioid')
 
 	   var modal = $(this)
-	   modal.find('.modal-title').text('Excluir Funcionário: ' + funcionario)
+	   modal.find('.modal-title').text('Excluir Funcionï¿½rio: ' + funcionario)
 	   modal.find('.modal-footer .btn-ok').attr('href','/chamados/funcionarios/excluir/' + id)			   
    }
    

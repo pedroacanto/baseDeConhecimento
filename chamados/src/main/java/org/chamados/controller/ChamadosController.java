@@ -1,6 +1,8 @@
 package org.chamados.controller;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,10 +10,7 @@ import javax.validation.Valid;
 import org.chamados.daos.ChamadoDAO;
 import org.chamados.daos.FuncionarioDAO;
 import org.chamados.daos.SistemaDAO;
-import org.chamados.models.Chamado;
-import org.chamados.models.Funcionario;
-import org.chamados.models.Sistema;
-import org.chamados.models.TipoChamado;
+import org.chamados.models.*;
 import org.chamados.validation.ChamadosValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +55,10 @@ public class ChamadosController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView salvar(@Valid Chamado chamado, BindingResult result,
-							   RedirectAttributes redirectAttributes, 
+							   RedirectAttributes redirectAttributes,
+							   @RequestParam("script_list") String[] scripts,
 							   @RequestParam("idSistema") Integer idSistema,
-							   @RequestParam("idFuncionario") Integer idFuncionario, 
+							   @RequestParam("idFuncionario") Integer idFuncionario,
 							   @RequestParam("tipoChamado") TipoChamado tipoChamado){
 		if(result.hasErrors()){
 			return form(chamado);
@@ -71,6 +71,17 @@ public class ChamadosController {
 		chamado.setSistema(sistema);
 		
 		chamado.setTipo_chamado(tipoChamado);
+
+		List<String> scriptStrList = Arrays.asList(scripts);
+		List<Script> scriptList = new ArrayList<>();
+
+		scriptStrList.forEach(s -> {
+			Script script = new Script();
+			script.setSql(s);
+			scriptList.add(script);
+		});
+
+		chamado.setScripts(scriptList);
 		
 		try{
 			chamadoDao.gravar(chamado);
