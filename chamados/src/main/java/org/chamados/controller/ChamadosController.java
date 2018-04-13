@@ -113,6 +113,56 @@ public class ChamadosController {
 		
 	}
 	
+	@RequestMapping(value="/buscaAvancada", method=RequestMethod.GET)
+	public ModelAndView buscaAvancada(Chamado chamado){
+		ModelAndView modelAndView = new ModelAndView("/chamados/busca");
+		
+		List<Funcionario> funcionarios = funcionarioDao.listar();
+		modelAndView.addObject("funcionarios",funcionarios);
+		
+		List<Sistema> sistemas = sistemaDao.listar();
+		modelAndView.addObject("sistemas", sistemas);
+		
+		modelAndView.addObject("tipos", TipoChamado.values()); 
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/buscaAvancada", method=RequestMethod.POST)
+	public ModelAndView buscaAvancadaChamado(Chamado chamado,
+										     @RequestParam("idSistema") Integer idSistema,
+										     @RequestParam("idFuncionario") Integer idFuncionario, 
+										     @RequestParam("tipoChamado") TipoChamado tipoChamado){
+		
+		if(idSistema != 0){
+			Sistema sistema = sistemaDao.buscaSistemaId(idSistema);
+			chamado.setSistema(sistema);
+		}	
+		if(idFuncionario != 0){
+			Funcionario funcionario = funcionarioDao.buscaFuncionarioId(idFuncionario);
+			chamado.setFuncionario_responsavel(funcionario);
+		
+		}if(tipoChamado != null){
+			chamado.setTipo_chamado(tipoChamado);
+		}
+				
+		List<Chamado> chamadosBusca = chamadoDao.buscaAvancada(chamado);
+		
+		ModelAndView modelAndView = new ModelAndView("/chamados/busca");
+		
+		List<Funcionario> funcionarios = funcionarioDao.listar();
+		modelAndView.addObject("funcionarios",funcionarios);
+		
+		List<Sistema> sistemas = sistemaDao.listar();
+		modelAndView.addObject("sistemas", sistemas);
+		
+		modelAndView.addObject("tipos", TipoChamado.values()); 
+		
+		modelAndView.addObject("chamadosBusca", chamadosBusca);
+				
+		return modelAndView;	
+	}
+	
 	@RequestMapping(value="/view/{id}", method=RequestMethod.GET)
 	public ModelAndView visualizar(@PathVariable("id") int id){ //@PathVariable pega tudo que tá na URL
 		Chamado chamado = chamadoDao.buscaChamadoId(id);		

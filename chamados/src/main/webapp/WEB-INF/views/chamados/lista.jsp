@@ -18,7 +18,7 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li><a href="/chamados/chamados/form">Cadastrar</a></li>
-		        <li><a href="">Busca Personalizada</a></li>
+		        <li><a href="/chamados/chamados/buscaAvancada">Busca Personalizada</a></li>
 		      </ul>
 		      <form class="navbar-form navbar-right" 
 		            action="/chamados/chamados/busca" method="get">
