@@ -4,6 +4,7 @@ package org.chamados.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -72,14 +73,12 @@ public class ChamadosController {
 		
 		chamado.setTipo_chamado(tipoChamado);
 
-		List<String> scriptStrList = Arrays.asList(scripts);
-		List<Script> scriptList = new ArrayList<>();
-
-		scriptStrList.forEach(s -> {
-			Script script = new Script();
-			script.setSql(s);
-			scriptList.add(script);
-		});
+		List<Script> scriptList = Arrays.asList(scripts).stream()
+				.map(s -> {
+					Script script = new Script();
+					script.setSql(s);
+					return script;
+				}).collect(Collectors.toList());
 
 		chamado.setScripts(scriptList);
 		

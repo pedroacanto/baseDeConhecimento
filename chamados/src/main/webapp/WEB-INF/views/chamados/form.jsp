@@ -73,7 +73,7 @@
 				<div class="custom-file">
 					<label for="sql_usado" >Scripts Utilizado:</label>
 					<form:errors path="scripts" style="color:red"/>
-					<form:textarea class ="form-control" placeholder="Cole o SQL Utilizado" path="scripts" name="script_list"/>
+					<textarea class ="form-control" placeholder="Cole o SQL Utilizado" name="script_list"></textarea>
 					<br>
 					<div class="Linha">
 						<!-- RECEBE DIVS DINAMICAS -->
