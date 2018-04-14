@@ -32,7 +32,7 @@ public class FuncionarioController {
 	@Autowired
 	SistemaDAO sistemaDao = new SistemaDAO();
 
-	
+
 	
 	@RequestMapping("/form")
 	public ModelAndView form(Funcionario funcionario){
@@ -47,14 +47,14 @@ public class FuncionarioController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView gravar(@Valid Funcionario funcionario, BindingResult result,
-			                   RedirectAttributes redirectAttributes, @RequestParam("idSistema") List<Integer> idSistemas){
+			                   RedirectAttributes redirectAttributes, @RequestParam("idSistema") List<Long> idSistemas){
 		if(result.hasErrors()){
 			return form(funcionario);
 		}		
 		
 		ArrayList<Sistema> sistemasSelecionados = new ArrayList<Sistema>();
 		
-		for(Integer idSistema: idSistemas){
+		for(Long idSistema: idSistemas){
 			Sistema sistemaEncontrado = sistemaDao.buscaSistemaId(idSistema);				
 			sistemasSelecionados.add(sistemaEncontrado);
 		}
@@ -113,14 +113,14 @@ public class FuncionarioController {
 	
 	@RequestMapping(value="/editar",method=RequestMethod.POST)
 	public ModelAndView editar(@Valid Funcionario funcionario, BindingResult result, 
-			                   RedirectAttributes redirectAttributes,  @RequestParam("idSistema") List<Integer> idSistemas){
+			                   RedirectAttributes redirectAttributes,  @RequestParam("idSistema") List<Long> idSistemas){
 		if(result.hasErrors()){
 			return edit(funcionario);
 		}
 	
 		ArrayList<Sistema> sistemasSelecionados = new ArrayList<Sistema>();
 		
-		for(Integer idSistema: idSistemas){
+		for(Long idSistema: idSistemas){
 			Sistema sistemaEncontrado = sistemaDao.buscaSistemaId(idSistema);				
 			sistemasSelecionados.add(sistemaEncontrado);
 		}

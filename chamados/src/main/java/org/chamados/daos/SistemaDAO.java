@@ -29,7 +29,7 @@ public class SistemaDAO {
 		return manager.createQuery("select s from Sistema s where nome like '"+nome+"%'").getResultList();
 	}
 	
-	public Sistema buscaSistemaId(int id){
+	public Sistema buscaSistemaId(Long id){
 		return manager.find(Sistema.class, id);
 	}
 	
@@ -37,7 +37,7 @@ public class SistemaDAO {
 		manager.merge(sistema);
 	}
 	
-	public void excluirSistema(int id){
+	public void excluirSistema(Long id){
 		Sistema sistema = manager.find(Sistema.class, id);
 		manager.remove(sistema);	
 	}

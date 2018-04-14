@@ -1,11 +1,14 @@
 package org.chamados.conf;
 
 import org.chamados.controller.FuncionarioController;
+import org.chamados.converters.ScriptsConvert;
 import org.chamados.daos.FuncionarioDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -16,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={FuncionarioController.class,FuncionarioDAO.class})
+@ComponentScan(basePackages = "org.chamados")
 public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 
 	@Bean
@@ -46,7 +49,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 
 	    return conversionService;
 	}
-	
+
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}

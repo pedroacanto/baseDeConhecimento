@@ -4,7 +4,7 @@
 
 <c:import url="../../header.jsp" />
 	<div class="container">
-		<form:form action="/chamados/funcionarios/editar" method="post" commandName="funcionario">
+		<form:form action="/chamados/funcionarios/editar" method="post" modelAttribute="funcionario">
 			<input type="hidden" name="id" value="${funcionario.id}">
 			<div class="form-group">
 				<label for="funcionario-nome" >Nome: </label>

@@ -5,14 +5,14 @@
 <c:import url="../../header.jsp" />
 <h2 align="center">Cadastro de Funcionários</h2>
 	<div class="container">
-		<form:form action="/chamados/funcionarios" method="post" commandName="funcionario">
+		<form:form action="/chamados/funcionarios" method="post" modelAttribute="funcionario">
 			<div class="form-group">
-				<label for="funcionario-nome" >Nome: </label>
+				<label>Nome: </label>
 				<form:errors path="nome" style="color:red" />
 				<form:input  class ="form-control" placeholder="Nome Funcionário" path="nome"/>
 			</div>
 			<div class="form-group">
-				<label for="funcionario-email" >Email: </label>
+				<label>Email: </label>
 				<form:errors path="email" style="color:red"/>
 				<div class="input-group">
 					<div class="input-group-addon">@</div>
@@ -20,13 +20,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="funcionario-funcao" >Função: </label>
+				<label>Função: </label>
 				<form:errors path="funcao" style="color:red"/>
 				<form:input class ="form-control"  placeholder="Função Funcionário" path="funcao" />
 			</div>
 			
 			<div class="form-group">
-				<label for="funcionario-sistemas">Atribuir Sistemas: </label>
+				<label>Atribuir Sistemas: </label>
 				<input type="checkbox" id="checkTodos" name="checkTodos">Marcar/Desmarcar Todos
 				<div>
 					<table class="table table-bordered" style="width: 50%">

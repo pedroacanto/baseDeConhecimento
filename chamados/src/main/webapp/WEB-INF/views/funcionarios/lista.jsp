@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="../../header.jsp" />
@@ -11,18 +12,18 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="/chamados/funcionarios/">Gerência Funcionário</a>
+		      <a class="navbar-brand" href="/funcionarios/">GerÃªncia FuncionÃ¡rio</a>
 		    </div>
 		    
 			<!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="/chamados/funcionarios/form">Cadastrar</a></li>
+		        <li><a href="/funcionarios/form">Cadastrar</a></li>
 		      </ul>
 		      <form class="navbar-form navbar-right" 
-		            action="/chamados/funcionarios/busca" method="get">
+		            action="/funcionarios/busca" method="get">
 		        <div class="form-group">
-		          <input type="text" class="form-control" name="nome" placeholder="Nome Funcionário">
+		          <input type="text" class="form-control" name="nome" placeholder="Nome FuncionÃ¯Â¿Â½rio">
 		        </div>
 		        <button type="submit" class="btn btn-default">Buscar</button>
 		      </form>
@@ -41,7 +42,7 @@
 			    <tr>
 			      <th scope="col">Nome</th>
 			      <th scope="col">Email</th>
-			      <th scope="col">Função</th>
+			      <th scope="col">FuncionÃ¡rio</th>
 			      <th scope="col">Sistemas</th>
 			      <th scope="col">Editar</th>
 			      <th scope="col">Excluir</th>
@@ -91,7 +92,7 @@
         <h3 class="modal-title" id="exampleModalLongTitle"></h3>
       </div>
       <div class="modal-body">
-        	Deseja realmente continuar com a operação?
+        	Deseja realmente continuar com a operaÃ¯Â¿Â½Ã¯Â¿Â½o?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

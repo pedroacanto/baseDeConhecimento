@@ -7,7 +7,7 @@
 <h2 align="center">Busca Personalizada</h2>
 	<div class="container">
 		<div class="jumbotron jumbotron-fluid" style="padding-top: 20px; padding-bottom: 20px;">
-			<form:form action="/chamados/chamados/buscaAvancada" method="post" commandName="chamado">
+			<form:form action="/chamados/chamados/buscaAvancada" method="post" modelAttribute="chamado">
 				<div class = "row">
 					<div class="form-group col-md-2">
 					<label for="numero_chamado">Número Chamado: </label>

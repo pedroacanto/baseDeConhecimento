@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:import url="../../header.jsp" />
@@ -12,13 +14,13 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="/chamados/sistemas/">Gerência Sistemas</a>
+		      <a class="navbar-brand" href="/chamados/sistemas/">GerÃªncia Sistemas</a>
 		    </div>
 		    
 			<!-- Collect the nav links, forms, and other content for toggling -->
 		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="/chamados/sistemas/form">Cadastrar</a></li>
+		        <li><a href="/chamados/sistemas/cadastrar">Cadastrar</a></li>
 		      </ul>
 		      <form class="navbar-form navbar-right" 
 		            action="/chamados/sistemas/busca" method="get">
@@ -47,7 +49,7 @@
 			<thead>
 			    <tr>
 			      <th scope="col">Nome</th>
-			      <th scope="col">Descrição</th>
+			      <th scope="col">DescriÃ§Ã£o</th>
 			      <th scope="col">Editar</th>
 			      <th scope="col">Excluir</th>
 			    </tr>
@@ -90,7 +92,7 @@
         <h3 class="modal-title" id="exampleModalLongTitle"></h3>
       </div>
       <div class="modal-body">
-        	Deseja realmente continuar com a operação?
+        	Deseja realmente continuar com a operaÃ§Ã£o?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

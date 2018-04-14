@@ -3,20 +3,14 @@ package org.chamados.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 @Table(name="sistema")
 public class Sistema {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	private String nome;
 	private String descricao;
@@ -26,12 +20,12 @@ public class Sistema {
 
 	@ManyToMany(mappedBy="sistemas")
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-	
-	public int getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

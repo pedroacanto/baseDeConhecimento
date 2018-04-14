@@ -58,7 +58,7 @@ public class ChamadosController {
 	public ModelAndView salvar(@Valid Chamado chamado, BindingResult result,
 							   RedirectAttributes redirectAttributes,
 							   @RequestParam("script_list") String[] scripts,
-							   @RequestParam("idSistema") Integer idSistema,
+							   @RequestParam("idSistema") Long idSistema,
 							   @RequestParam("idFuncionario") Integer idFuncionario,
 							   @RequestParam("tipoChamado") TipoChamado tipoChamado){
 		if(result.hasErrors()){
@@ -129,7 +129,7 @@ public class ChamadosController {
 	
 	@RequestMapping(value="/buscaAvancada", method=RequestMethod.POST)
 	public ModelAndView buscaAvancadaChamado(Chamado chamado,
-										     @RequestParam("idSistema") Integer idSistema,
+										     @RequestParam("idSistema") Long idSistema,
 										     @RequestParam("idFuncionario") Integer idFuncionario, 
 										     @RequestParam("tipoChamado") TipoChamado tipoChamado){
 		

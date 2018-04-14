@@ -5,7 +5,7 @@
 <c:import url="../../header.jsp" />
 <h2 align="center">Cadastro de Chamados</h2>
 	<div class="container">
-		<form:form action="/chamados/chamados" method="post" commandName="chamado" enctype="multipart/form-data">
+		<form:form action="/chamados/chamados" method="post" modelAttribute="chamado" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-group col-md-2">
 					<label for="numero_chamado" >Número Chamado: </label>
