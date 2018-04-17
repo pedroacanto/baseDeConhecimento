@@ -10,6 +10,7 @@ import org.chamados.repositories.SistemaRepository;
 import org.chamados.validation.SistemaValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -68,6 +69,11 @@ public class SistemaController {
 
 		redirectAttributes.addFlashAttribute("sucesso", "Sistema Cadastrado com sucesso");
 		return new ModelAndView("redirect:sistemas");
+	}
+
+	@GetMapping("teste")
+	public ModelAndView teste(){
+		return new ModelAndView("/sistemas/teste");
 	}
 	
 	@GetMapping("/excluir/{id}")
