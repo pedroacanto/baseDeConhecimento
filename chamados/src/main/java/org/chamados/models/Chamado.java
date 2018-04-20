@@ -3,6 +3,7 @@ package org.chamados.models;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -50,7 +51,7 @@ public class Chamado {
 	@ManyToOne
 	private Funcionario funcionario_responsavel;
 	
-	@OneToMany(mappedBy="chamado") //nome do atributo da classe no mappedBy
+	@OneToMany(mappedBy="chamado", cascade=CascadeType.ALL) //nome do atributo da classe no mappedBy
 	private List<Script> scripts;
 	
 	public int getId() {

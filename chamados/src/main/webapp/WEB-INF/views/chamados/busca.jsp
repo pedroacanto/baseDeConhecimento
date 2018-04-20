@@ -61,9 +61,14 @@
 				</div>
 				
 				<div class="row">
-					<div class="form-group col-md-11">
+					<div class="form-group col-md-5">
 						<label for="sistema-descricao" >Descrição: </label>
 						<form:textarea class ="form-control" placeholder="Descricao Chamado" path="descricao" />
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label for="sistema-descricao" >Script: </label>
+						<textarea class ="form-control" placeholder="Script Utilizado" name="script"></textarea>
 					</div>
 					
 					<div class="form-group col-md-1">
@@ -73,6 +78,11 @@
 						
 			</form:form>
 		</div>
+		<c:if test="${erros != null}">
+			<div class="alert alert-warning" role="alert">
+				${erros}
+			</div>
+		</c:if>
 		<div>
 			<table class="table table-bordered" style="width: 100%">
 				<thead>

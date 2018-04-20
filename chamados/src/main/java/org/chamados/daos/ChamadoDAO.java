@@ -1,6 +1,7 @@
 package org.chamados.daos;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.chamados.models.Chamado;
+import org.chamados.models.Script;
+import org.chamados.models.Sistema;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +21,18 @@ public class ChamadoDAO {
 	@PersistenceContext
 	EntityManager manager;
 	
-	public void gravar(Chamado chamado){
-		manager.persist(chamado);
+	public void gravar(Chamado chamado, String[] script_list){
+		ArrayList<Script> attachedScripts = new ArrayList<>();
+	    
+	    for(String script: script_list) {
+	    	Script scriptNovo = new Script();
+			scriptNovo.setChamado(chamado);
+			scriptNovo.setScript_usado(script);	    
+			attachedScripts.add(scriptNovo);
+	    }
+	    chamado.setScripts(attachedScripts);
+		
+	    manager.merge(chamado);
 	}
 	
 	public List<Chamado> listar(){
@@ -34,9 +47,16 @@ public class ChamadoDAO {
 		return manager.find(Chamado.class, id);
 	}
 
-	public List<Chamado> buscaAvancada(Chamado chamado) {
+	public List<Chamado> buscaAvancada(Chamado chamado, String script) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select c from Chamado c where ");
+		sql.append("select distinct c from Chamado c left join c.scripts s ");
+		/*if("".equalsIgnoreCase(script)) {
+			sql.append(" left join c.scripts ");
+		}*/
+		sql.append(" where ");
+		if(script != null && !"".equalsIgnoreCase(script)) {
+			sql.append(" s.script_usado like'%"+script+"%' and ");
+		}
 		if(chamado.getNumero_chamado() != null && chamado.getNumero_chamado() != ""){
 			sql.append("c.numero_chamado = '"+chamado.getNumero_chamado()+"' and ");
 		}
@@ -67,4 +87,20 @@ public class ChamadoDAO {
 		
 		return manager.createQuery(sql.toString()).getResultList();		
 	}
+
+	public List<Script> buscaScriptsChamado(int id) {
+		return manager.createQuery("select s from Script s where chamado_id = "+id).getResultList();
+	}
+	
+	/*public List<Chamado> buscaAvancadaScriptChamado(String script){
+		List<Script> scripts = manager.createQuery("select s from Script s where s.sql_usado like'%"+script+"%'").getResultList();
+		List<Chamado> chamadosListResult = new ArrayList<Chamado>();
+		
+		for(Script scriptResult : scripts) {
+			Chamado chamadoResult = scriptResult.getChamado();
+			chamadosListResult.add(chamadoResult);
+		}
+		return chamadosListResult;
+	}*/
+	
 }
