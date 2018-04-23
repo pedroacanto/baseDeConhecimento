@@ -71,7 +71,7 @@ public class SistemaController {
 
 	@GetMapping("teste")
 	public ModelAndView teste(){
-		return new ModelAndView("jsp/sistemas/teste");
+		return new ModelAndView("thymeleaf/sistemas/lista");
 	}
 	
 	@GetMapping("/excluir/{id}")
