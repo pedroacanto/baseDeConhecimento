@@ -39,7 +39,7 @@ public class FuncionarioController {
 		
 		List<Sistema> sistemas =  sistemaDao.listar();
 		
-		ModelAndView modelAndView = new ModelAndView("funcionarios/form");
+		ModelAndView modelAndView = new ModelAndView("jsp/funcionarios/form");
 		modelAndView.addObject("sistemas", sistemas);
 		
 		return modelAndView;
@@ -69,7 +69,7 @@ public class FuncionarioController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listar(){
 		List<Funcionario> funcionarios = funcionarioDAO.listar();
-		ModelAndView modelAndView = new ModelAndView("/funcionarios/lista");
+		ModelAndView modelAndView = new ModelAndView("jsp/funcionarios/lista");
 		modelAndView.addObject("funcionarios",funcionarios);
 		return modelAndView;
 	}
@@ -77,7 +77,7 @@ public class FuncionarioController {
 	@RequestMapping(value="/busca", method = RequestMethod.GET)
 	public ModelAndView buscarFuncionario(@RequestParam("nome") String nome){
 		List<Funcionario> funcionarios = funcionarioDAO.buscarFuncionarioNome(nome);
-		ModelAndView modelAndView = new ModelAndView("/funcionarios/lista");
+		ModelAndView modelAndView = new ModelAndView("jsp/funcionarios/lista");
 		modelAndView.addObject("funcionarios", funcionarios);
 		return modelAndView;
 	}
@@ -91,7 +91,7 @@ public class FuncionarioController {
 	
 	@RequestMapping(value="/editar/{id}", method = RequestMethod.GET)
 	public ModelAndView editarFuncionario(@PathVariable("id") int id){
-		ModelAndView modelAndView = new ModelAndView("funcionarios/edit");
+		ModelAndView modelAndView = new ModelAndView("jsp/funcionarios/edit");
 		
 		Funcionario funcionario = funcionarioDAO.buscaFuncionarioId(id);
 		modelAndView.addObject("funcionario", funcionario);
@@ -135,7 +135,7 @@ public class FuncionarioController {
 	
 	@RequestMapping("/edit")
 	public ModelAndView edit(Funcionario funcionario){
-		return new ModelAndView("funcionarios/edit");
+		return new ModelAndView("jsp/funcionarios/edit");
 	}
 	
 	@InitBinder

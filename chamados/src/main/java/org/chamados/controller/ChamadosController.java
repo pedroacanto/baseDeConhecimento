@@ -46,7 +46,7 @@ public class ChamadosController {
 		List<Sistema> sistemas = sistemaDao.listar();
 		List<Funcionario> funcionarios = funcionarioDao.listar();
 		
-		ModelAndView modelAndView = new ModelAndView("chamados/form");
+		ModelAndView modelAndView = new ModelAndView("jsp/chamados/form");
 		modelAndView.addObject("tipos", TipoChamado.values()); //Busca os valores do ENUM
 		
 		modelAndView.addObject("sistemas", sistemas);
@@ -65,17 +65,7 @@ public class ChamadosController {
 							   @RequestParam("tipoChamado") TipoChamado tipoChamado){
 		if(result.hasErrors()){
 			return form(chamado);
-		}				
-		
-		/*List<Script> scripts = new ArrayList<Script>();
-		
-		for(String le_array_script : script_list) {
-			Script novo_script = new Script();
-			novo_script.setScript_usado(le_array_script);
-			scripts.add(novo_script);
 		}
-		
-		chamado.setScripts(scripts);*/
 		
 		Funcionario funcionario = funcionarioDao.buscaFuncionarioId(idFuncionario);
 		chamado.setFuncionario_responsavel(funcionario);
@@ -100,7 +90,7 @@ public class ChamadosController {
 	public ModelAndView listar(){
 		List<Chamado> chamados = chamadoDao.listar();
 		
-		ModelAndView modelAndView = new ModelAndView("/chamados/lista");
+		ModelAndView modelAndView = new ModelAndView("jsp/chamados/lista");
 		modelAndView.addObject("chamados", chamados);
 		return modelAndView;
 	}
@@ -109,7 +99,7 @@ public class ChamadosController {
 	public ModelAndView buscarChamado(@RequestParam("numero_chamado") String numero_chamado){
 		List<Chamado> chamados = chamadoDao.buscaChamadoCod(numero_chamado);
 		
-		ModelAndView modelAndView = new ModelAndView("/chamados/lista");
+		ModelAndView modelAndView = new ModelAndView("jsp/chamados/lista");
 		modelAndView.addObject("chamados", chamados);
 		return modelAndView;
 		
@@ -117,7 +107,7 @@ public class ChamadosController {
 	
 	@RequestMapping(value="/buscaAvancada", method=RequestMethod.GET)
 	public ModelAndView buscaAvancada(Chamado chamado){
-		ModelAndView modelAndView = new ModelAndView("/chamados/busca");
+		ModelAndView modelAndView = new ModelAndView("jsp/chamados/busca");
 		
 		List<Funcionario> funcionarios = funcionarioDao.listar();
 		modelAndView.addObject("funcionarios",funcionarios);
@@ -149,7 +139,7 @@ public class ChamadosController {
 			chamado.setTipo_chamado(tipoChamado);
 		}		
 		
-		ModelAndView modelAndView = new ModelAndView("/chamados/busca");
+		ModelAndView modelAndView = new ModelAndView("jsp/chamados/busca");
 		
 		List<Funcionario> funcionarios = funcionarioDao.listar();
 		modelAndView.addObject("funcionarios",funcionarios);
@@ -176,7 +166,7 @@ public class ChamadosController {
 		
 		List<Script> scripts = chamadoDao.buscaScriptsChamado(id);
 		
-		ModelAndView modelAndView = new ModelAndView("/chamados/view");
+		ModelAndView modelAndView = new ModelAndView("jsp/chamados/view");
 		modelAndView.addObject("chamado", chamado);
 		modelAndView.addObject("scripts", scripts);
 		

@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.chamados.daos.SistemaDAO;
 import org.chamados.models.Sistema;
 import org.chamados.repositories.SistemaRepository;
 import org.chamados.validation.SistemaValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("sistemas")
+@RequestMapping("/sistemas")
 public class SistemaController {
 
 	@Autowired
@@ -28,7 +26,7 @@ public class SistemaController {
 	public ModelAndView listar(){
 		List<Sistema> sistemas = repo.findAll();
 
-		ModelAndView modelAndView = new ModelAndView("/sistemas/lista");
+		ModelAndView modelAndView = new ModelAndView("jsp/sistemas/lista");
 		modelAndView.addObject("sistemas",sistemas);
 
 		return modelAndView;
@@ -36,14 +34,14 @@ public class SistemaController {
 
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Sistema sistema){
-		return new ModelAndView("sistemas/cadastrar");
+		return new ModelAndView("jsp/sistemas/cadastrar");
 	}
 
 	@RequestMapping(value="/buscar", method = RequestMethod.GET)
 	public ModelAndView buscar(@RequestParam("nome") String nome){
 		List<Sistema> sistemas = repo.findByNomeContaining(nome);
 
-		ModelAndView modelAndView = new ModelAndView("/sistemas/lista");
+		ModelAndView modelAndView = new ModelAndView("jsp/sistemas/lista");
 		modelAndView.addObject("sistemas", sistemas);
 
 		return modelAndView;
@@ -51,7 +49,7 @@ public class SistemaController {
 	
 	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Long id){
-		ModelAndView modelAndView = new ModelAndView("sistemas/editar");
+		ModelAndView modelAndView = new ModelAndView("jsp/sistemas/editar");
 
 		Sistema sistema = repo.findById(id).get();
 		modelAndView.addObject("sistema", sistema);
@@ -73,7 +71,7 @@ public class SistemaController {
 
 	@GetMapping("teste")
 	public ModelAndView teste(){
-		return new ModelAndView("/sistemas/teste");
+		return new ModelAndView("jsp/sistemas/teste");
 	}
 	
 	@GetMapping("/excluir/{id}")
