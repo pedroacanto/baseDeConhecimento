@@ -1,17 +1,19 @@
 package org.chamados.controller;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.chamados.daos.ChamadoDAO;
 import org.chamados.daos.FuncionarioDAO;
 import org.chamados.daos.SistemaDAO;
-import org.chamados.models.*;
+import org.chamados.models.Chamado;
+import org.chamados.models.Funcionario;
+import org.chamados.models.Script;
+import org.chamados.models.Sistema;
+import org.chamados.models.TipoChamado;
 import org.chamados.validation.ChamadosValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,13 +59,23 @@ public class ChamadosController {
 	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView salvar(@Valid Chamado chamado, BindingResult result,
 							   RedirectAttributes redirectAttributes,
-							   @RequestParam("script_list") String[] scripts,
+							   @RequestParam("script_list[]") String[] script_list,
 							   @RequestParam("idSistema") Long idSistema,
 							   @RequestParam("idFuncionario") Integer idFuncionario,
 							   @RequestParam("tipoChamado") TipoChamado tipoChamado){
 		if(result.hasErrors()){
 			return form(chamado);
+		}				
+		
+		/*List<Script> scripts = new ArrayList<Script>();
+		
+		for(String le_array_script : script_list) {
+			Script novo_script = new Script();
+			novo_script.setScript_usado(le_array_script);
+			scripts.add(novo_script);
 		}
+		
+		chamado.setScripts(scripts);*/
 		
 		Funcionario funcionario = funcionarioDao.buscaFuncionarioId(idFuncionario);
 		chamado.setFuncionario_responsavel(funcionario);
@@ -72,18 +84,9 @@ public class ChamadosController {
 		chamado.setSistema(sistema);
 		
 		chamado.setTipo_chamado(tipoChamado);
-
-		List<Script> scriptList = Arrays.asList(scripts).stream()
-				.map(s -> {
-					Script script = new Script();
-					script.setSql(s);
-					return script;
-				}).collect(Collectors.toList());
-
-		chamado.setScripts(scriptList);
 		
 		try{
-			chamadoDao.gravar(chamado);
+			chamadoDao.gravar(chamado,script_list);
 			redirectAttributes.addFlashAttribute("sucesso","Chamado cadastrado com sucesso");
 			return new ModelAndView("redirect:/chamados");
 		}catch(Exception ex){
@@ -131,7 +134,8 @@ public class ChamadosController {
 	public ModelAndView buscaAvancadaChamado(Chamado chamado,
 										     @RequestParam("idSistema") Long idSistema,
 										     @RequestParam("idFuncionario") Integer idFuncionario, 
-										     @RequestParam("tipoChamado") TipoChamado tipoChamado){
+										     @RequestParam("tipoChamado") TipoChamado tipoChamado,
+										     @RequestParam("script") String script){
 		
 		if(idSistema != 0){
 			Sistema sistema = sistemaDao.buscaSistemaId(idSistema);
@@ -143,9 +147,7 @@ public class ChamadosController {
 		
 		}if(tipoChamado != null){
 			chamado.setTipo_chamado(tipoChamado);
-		}
-				
-		List<Chamado> chamadosBusca = chamadoDao.buscaAvancada(chamado);
+		}		
 		
 		ModelAndView modelAndView = new ModelAndView("/chamados/busca");
 		
@@ -157,6 +159,12 @@ public class ChamadosController {
 		
 		modelAndView.addObject("tipos", TipoChamado.values()); 
 		
+		List<Chamado> chamadosBusca = chamadoDao.buscaAvancada(chamado, script);
+		
+		
+		if(chamadosBusca.size() == 0) {
+			modelAndView.addObject("erros", "Não foi encontrado nenhum resultado para a busca.");
+		}
 		modelAndView.addObject("chamadosBusca", chamadosBusca);
 				
 		return modelAndView;	
@@ -164,9 +172,13 @@ public class ChamadosController {
 	
 	@RequestMapping(value="/view/{id}", method=RequestMethod.GET)
 	public ModelAndView visualizar(@PathVariable("id") int id){ //@PathVariable pega tudo que tá na URL
-		Chamado chamado = chamadoDao.buscaChamadoId(id);		
+		Chamado chamado = chamadoDao.buscaChamadoId(id);
+		
+		List<Script> scripts = chamadoDao.buscaScriptsChamado(id);
+		
 		ModelAndView modelAndView = new ModelAndView("/chamados/view");
 		modelAndView.addObject("chamado", chamado);
+		modelAndView.addObject("scripts", scripts);
 		
 		return modelAndView;		
 	}

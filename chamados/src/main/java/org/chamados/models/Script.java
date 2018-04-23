@@ -30,11 +30,11 @@ public class Script {
 		this.id = id;
 	}
 
-	public String getSql() {
+	public String getScript_usado() {
 		return script_usado;
 	}
 
-	public void setSql(String script_usado) {
+	public void setScript_usado(String script_usado) {
 		this.script_usado = script_usado;
 	}
 

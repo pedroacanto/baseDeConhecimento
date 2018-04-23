@@ -34,14 +34,23 @@
     		${chamado.resolucao}
   		</div>
 	</div>
-	<div class="panel panel-default">
-	  <div class="panel-heading">
-	    	<h3 class="panel-title">SQL Utilizado</h3>
-	  </div>
-  		<div class="panel-body">
-    		
-  		</div>
-	</div>
+	<c:choose>
+		<c:when test="${scripts.size() > 0}">
+			<c:forEach items="${scripts}" var="script">
+				<div class="panel panel-default">
+		  			<div class="panel-heading">
+		    			<h3 class="panel-title">SQL Utilizado</h3>
+		  			</div>
+	  				<div class="panel-body">
+	  					${script.script_usado}
+	  				</div>
+				</div>	
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<div class="alert alert-warning" role="alert">Não foi enviado scripts para o chamado!</div>	
+		</c:otherwise>			
+	</c:choose>
 	<a class="btn btn-primary" href="/chamados/chamados/">Voltar</a>		
 </div>
 <c:import url="../../footer.jsp" />
